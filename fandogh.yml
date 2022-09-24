@@ -1,0 +1,10 @@
+kind: ExternalService
+name: api
+spec:
+  image_pull_policy: Always
+  port: 80
+  source:
+    context: .
+    project_type: fastapi
+    python_version: '3.8'
+    wsgi_module: app.main
