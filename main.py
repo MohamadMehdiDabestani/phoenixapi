@@ -22,7 +22,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.get("/")
+@app.get("/")
 def test():
     return {"Hello" : "Wrold"}
 class AnalysisItem(BaseModel):
