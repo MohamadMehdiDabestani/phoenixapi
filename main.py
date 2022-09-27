@@ -37,9 +37,7 @@ def analysisFunc(coin , item):
         df.ta.ha(append=True)
         df.drop(['open','low','close', 'high'], axis=1, inplace=True)
         df.rename(columns={'HA_open' : "open" , 'HA_close' : "close" , 'HA_high' : 'high' , 'HA_low' : "low"} ,  inplace=True)
-    limit = common._filter(item.strategy['limit']["value"] , "timeFrame" , item.strategy['timeFrame'])[0]
-    limit["type"] = item.strategy['limit']['type']
-    analys = strategy.analysis(df , item.strategy["indicators"] ,item.strategy["combine"],coin , item.strategy['timeFrame'] , limit , 
+    analys = strategy.analysis(df , item.strategy["indicators"] ,item.strategy["combine"],coin , item.strategy['timeFrame']  , 
     item.exchange)
     return json.dumps(analys, indent=4, sort_keys=True, default=str)
 

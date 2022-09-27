@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 from .common import updateResult , result , precentageDifferent
 from scipy.stats import linregress
+from datetime import datetime
+
 def detectionBaseCandle(row):
     realbody = abs(row.open - row.close)
     candle_range = row.high - row.low

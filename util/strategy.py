@@ -29,8 +29,8 @@ def callFuncs(name , coin , indicator , combineIndicator):
     MAP_FUNC[name](coin, indicator , combineIndicator )
 
 
-def analysis(df , strategy ,combineIndicator, coinName , timeFrame , limit , exchange):
-    initialize(coinName , timeFrame , limit , exchange)
+def analysis(df , strategy ,combineIndicator, coinName , timeFrame , exchange):
+    initialize(coinName , timeFrame , exchange)
     for ind in strategy:
         callFuncs(ind["name"], df , ind,combineIndicator )
     return result

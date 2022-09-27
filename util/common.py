@@ -5,7 +5,6 @@ import pandas as pd
 import pandas_ta as pdt
 import ccxt
 result = {}
-limit = {}
 
 def _filter(data , prop , val):
     return list(filter(lambda d: d[prop] == val, data))
@@ -26,16 +25,6 @@ def precentageDifferent(price , source):
 def getBreak(obj , name):
     return obj["breake"][name]
 
-def calculateLimit(df):
-    global limit
-    delta = pd.Timedelta(f"{limit['day']}days {limit['hours']}hours {limit['minutes']}min")
-    if str(delta) == "0 days 00:00:00" or limit["type"] == "default":
-        result = df.to_dict(orient='records')
-        return result[-1]["time"] if len(result) > 0 else {}
-    filteringDelta =  df[df['time'] >= pd.Timestamp.today() - delta]
-    filteringDelta = filteringDelta.to_dict(orient='records')
-    return filteringDelta[-1]["time"] if len(filteringDelta) > 0 else {}
-    
 def cross(dates ,data , _above , offset=0):
     crosses = pdt.tsignals(data, above=_above, offset=offset, asbool=True)
     crosses = crosses.loc[crosses['TS_Entries'] == True]
@@ -53,16 +42,15 @@ def _break(dates ,value, state ,_above,offset=0):
         return {}
     breaking['time'] = dates
     breaking.set_index('time',append = True)
-    return calculateLimit(breaking)
+    result = breaking.to_dict(orient='records')
+    return result[-1]["time"] if len(result) > 0 else {}
 
-def initialize(coinName , timeFrame , _limit , _exchange):
+def initialize(coinName , timeFrame  , _exchange):
     global result
-    global limit
     result.clear()
     result["coinName"] = coinName
     result["timeFrame"] = timeFrame
     result["exchange"] = _exchange
-    limit = _limit
 
 def checkAdx(adxValue , signal):
     return adxValue > 25 & signal
