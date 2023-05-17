@@ -7,6 +7,7 @@ from util import strategy
 from util import common
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import uvicorn
 
 app = FastAPI()
 
@@ -124,3 +125,5 @@ async def coin(item : CoinItem):
 # timeFrames = {'1d' : 24 * 60 * 60 , '2d' : 48 * 60 * 60  , '3d' : 72 * 60 * 60 , '1h': 60 * 60 , '2h' : 120 * 60 , '3h': 180 * 60  , '4h': 240 * 60  , '5h': 300 * 60  , '6h': 360 * 60  , '7h': 420 * 60  , '8h': 480 * 60 , '9h':540*60 , '10h':600*60,'11h':660*60,'12h': 720*60,'30m' : 30 , '15m' : 15 , '1m' : 1 , '5m' : 5}
 # api key : PKQ4ZQ0H9JO6OUX8P2G5
 # secret : i3C5GFFqGbWDMbbOLtvOrCwOUDOtadwIc58w67ye
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=80)
