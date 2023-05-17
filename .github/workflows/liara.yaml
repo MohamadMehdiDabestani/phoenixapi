@@ -16,4 +16,4 @@ jobs:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
           npm i -g @liara/cli@3
-          liara deploy --app="phoenix_api" --api-token="$LIARA_TOKEN" --detach --port=80
+          liara deploy --app="phoenixcryptoapi" --api-token="$LIARA_TOKEN" --detach --port=80
