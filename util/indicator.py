@@ -209,22 +209,22 @@ def SandR(coin, indicator , combine):
                             ichi["ITS_9"][i + diff], ichi["IKS_26"][i + diff])
 
 def trendline(coin, indicator , combine):
-    df = coin.iloc[-70:]
+    df = coin.iloc[-120:]
     # df = coin.copy()
     df['Number'] = np.arange(len(df))+1
     df_high = df.copy()
     df_low = df.copy()
     high_limit = 0
     low_limit = 0
-    while len(df_high)>3:
+    while len(df_high)>2:
         high_limit += 1
-        if(high_limit == 15):
+        if(high_limit == 10):
             break
         slope, intercept, r_value, p_value, std_err = linregress(x=df_high['Number'], y=df_high['high'])
         df_high = df_high.loc[df_high['high'] > slope * df_high['Number'] + intercept]
-    while len(df_low)>3:
+    while len(df_low)>2:
         low_limit += 1
-        if(low_limit == 15):
+        if(low_limit == 10):
             break
         slope, intercept, r_value, p_value, std_err = linregress(x=df_low['Number'], y=df_low['low'])
         df_low = df_low.loc[df_low['low'] < slope * df_low['Number'] + intercept]
